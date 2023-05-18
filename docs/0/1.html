@@ -1,0 +1,189 @@
+<style>
+.flex-textarea {
+    position: relative;
+    margin:0; padding:0;
+    font-size: 1em;
+    line-height: 1.7em;
+    letter-spacing: 0.05em;
+    writing-mode: horizontal-tb;
+    text-orientation: mixed;
+}
+.flex-textarea-dummy {
+    margin:0; padding:0;
+    overflow: hidden;
+    visibility: hidden;
+    box-sizing: border-box;
+    min-height: 1.7em;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+    border: 1px solid;
+}
+.flex-textarea > textarea {
+    position: absolute;
+    top: 0;
+    left: 0;
+    box-sizing: border-box;
+    margin:0; padding:0;
+    display: block;
+    overflow: hidden;
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    font: inherit;
+    letter-spacing: inherit;
+    resize: none;
+    border: 1px solid #b6c3c6;
+    border-radius: 4px;
+    color: inherit;
+    background-color: transparent;
+}
+label { background: #ffffaa; }
+</style>
+
+<script>
+window.addEventListener('DOMContentLoaded', async(event) => {
+    for (let ta of [...document.querySelectorAll('.flex-textarea > textarea')]) {
+        ta.addEventListener('input', e=>{
+            console.log('setupFlexTextarea Event', e, e.target, e.target.previousElementSibling)
+            e.target.previousElementSibling.textContent = e.target.value + '\u200b'
+        })
+        ta.value = ''
+        ta.dispatchEvent(new Event('input'))
+    }
+});
+</script>
+
+<h1>textarea</h1>
+<textarea></textarea>
+<textarea style="width:100%;"></textarea>
+<div class="flex-textarea"><div class="flex-textarea-dummy" aria-hidden></div><textarea></textarea></div>
+
+<h1>label inner</h1>
+<table>
+<tr><td><label>Textarea<textarea></textarea></label></td><td><label><textarea></textarea>Textarea</label></td></tr>
+<tr><td><label>Textarea<br><textarea></textarea></label></td><td><label><textarea></textarea><br>Textarea</label></td></tr>
+</table>
+<p>ラベル<code>Textarea</code>をクリックすると対応するテキストエリアにフォーカスが当たる。</p>
+
+<h1>label inner block</h1>
+<table>
+<tr><td><label style="display:block">Textarea<textarea></textarea></label></td><td><label style="display:block"><textarea></textarea>Textarea</label></td></tr>
+<tr><td><label style="display:block">Textarea<br><textarea></textarea></label></td><td><label style="display:block"><textarea></textarea><br>Textarea</label></td></tr>
+</table>
+<p>ラベル<code>Textarea</code>をブロック要素にしたためテキストでない空白部分をクリックしても対応するテキストエリアにフォーカスが当たる。</p>
+
+<h1>label for</h1>
+<table>
+<tr><td><label for="ta0">Textarea 0</label><textarea id="ta0"></textarea></td><td><textarea id="ta1"></textarea><label for="ta1">Textarea 1</label></td></tr>
+<tr><td><label for="ta2">Textarea 2</label><br><textarea id="ta2"></textarea></td><td><textarea id="ta3"></textarea><br><label for="ta3">Textarea 3</label></td></tr>
+</table>
+
+<h1>label for block</h1>
+<table>
+<tr><td><label for="ta4" style="display:block">Textarea 4</label><textarea id="ta4"></textarea></td><td><textarea id="ta5"></textarea><label for="ta5" style="display:block">Textarea 5</label></td></tr>
+<tr><td><label for="ta6" style="display:block">Textarea 6</label><textarea id="ta6"></textarea></td><td><textarea id="ta7"></textarea><label for="ta7" style="display:block">Textarea 7</label></td></tr>
+</table>
+
+<h1>table th</h1>
+<table>
+<tr><th><label for="ta8" style="display:block">Textarea</label></th><td><textarea id="ta8"></textarea></td></tr>
+<tr><th><label for="ta9" style="display:block">Textarea 100%</label></th><td><textarea id="ta9" style="width:100%;"></textarea></td></tr>
+<tr><th><label for="ta10" style="display:block">FlexTextarea</label></th><td><div class="flex-textarea"><div class="flex-textarea-dummy" aria-hidden></div><textarea id="ta10"></textarea></div></td></tr>
+</table>
+
+<h1>table td</h1>
+
+<table>
+<tr><td><label for="ta8" style="display:block">Textarea</label></td><td><textarea id="ta8"></textarea></td></tr>
+<tr><td><label for="ta9" style="display:block">Textarea 100%</label></td><td><textarea id="ta9" style="width:100%;"></textarea></td></tr>
+<tr><td><label for="ta10" style="display:block">FlexTextarea</label></td><td><div class="flex-textarea"><div class="flex-textarea-dummy" aria-hidden></div><textarea id="ta10"></textarea></div></td></tr>
+</table>
+
+
+
+<h1>table td:100%</h1>
+
+<table>
+<tr><th>Textarea</th><td><textarea></textarea></td></tr>
+<tr><th>Textarea 100%</th><td style="width:100%;"><textarea style="width:100%;"></textarea></td></tr>
+<tr><th>FlexTextarea</th><td style="width:100%;"><div class="flex-textarea"><div class="flex-textarea-dummy" aria-hidden></div><textarea></textarea></div></td></tr>
+</table>
+
+<h1>table td:100% label</h1>
+
+<table>
+<tr><th>Textarea</th><td><textarea></textarea></td></tr>
+<tr><th>Textarea 100%</th><td style="width:100%;"><textarea style="width:100%;"></textarea></td></tr>
+<tr><th>FlexTextarea</th><td style="width:100%;"><div class="flex-textarea"><div class="flex-textarea-dummy" aria-hidden></div><textarea></textarea></div></td></tr>
+</table>
+
+<h1>div display:table;</h1>
+
+<div style="display:table;">
+    <div style="display:table-row;">
+        <div style="display:table-cell;">Textarea</div>
+        <div style="display:table-cell;"><textarea></textarea></div>
+    </div>
+    <div style="display:table-row;">
+        <div style="display:table-cell;">Textarea 100%</div>
+        <div style="display:table-cell;"><textarea style="width:100%;"></textarea></div>
+    </div>
+    <div style="display:table-row;">
+        <div style="display:table-cell;">FlexTextarea</div>
+        <div style="display:table-cell;"><div class="flex-textarea"><div class="flex-textarea-dummy" aria-hidden></div><textarea></textarea></div></div>
+    </div>
+</div>
+
+<h1>div display:table-cell;width:100%;</h1>
+
+<div style="display:table;">
+    <div style="display:table-row;">
+        <div style="display:table-cell;">Textarea</div>
+        <div style="display:table-cell;"><textarea></textarea></div>
+    </div>
+    <div style="display:table-row;">
+        <div style="display:table-cell;">Textarea 100%</div>
+        <div style="display:table-cell;width:100%;"><textarea style="width:100%;"></textarea></div>
+    </div>
+    <div style="display:table-row;">
+        <div style="display:table-cell;">FlexTextarea</div>
+        <div style="display:table-cell;width:100%;"><div class="flex-textarea"><div class="flex-textarea-dummy" aria-hidden></div><textarea></textarea></div></div>
+    </div>
+</div>
+
+<h1>textarea display:table-cell;width:100%;</h1>
+
+<div style="display:table;">
+    <div style="display:table-row;">
+        <span style="display:table-cell;">Textarea</span>
+        <textarea style="display:table-cell;"></textarea>
+    </div>
+    <div style="display:table-row;">
+        <span style="display:table-cell;">Textarea 100%</span>
+        <textarea style="display:table-cell;width:100%;"></textarea>
+    </div>
+    <div style="display:table-row;">
+        <span style="display:table-cell;">FlexTextarea</span>
+        <div style="display:table-cell;width:100%;" class="flex-textarea"><div class="flex-textarea-dummy" aria-hidden></div><textarea></textarea></div>
+    </div>
+</div>
+
+<h1>textarea display:block;width:100%;</h1>
+
+<div style="display:table;width:100%;">
+    <div style="display:table-row;width:100%;">
+        <span style="display:block;">Textarea</span>
+        <textarea style="display:block;"></textarea>
+    </div>
+    <div style="display:table-row;width:100%;">
+        <span style="display:block;">Textarea 100%</span>
+        <textarea style="display:block;width:100%;"></textarea>
+    </div>
+    <div style="display:table-row;width:100%;">
+        <span style="display:block;">FlexTextarea</span>
+        <div style="display:block;width:100%;" class="flex-textarea"><div class="flex-textarea-dummy" aria-hidden></div><textarea></textarea></div>
+    </div>
+</div>
+

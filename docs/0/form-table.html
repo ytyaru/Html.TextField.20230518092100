@@ -1,0 +1,161 @@
+<h1>入力要素</h1>
+<div id="form-table">
+    <table><thead><caption>入力系</caption></thead>
+        <tr><th>button</th><td><button>ボタン</button></td></tr>
+        <tr><th>input</th><td><input placeholder="適当なテキスト" value="初期値。\n改行なし。"></td></tr>
+        <tr><th>textarea</th><td><textarea placeholder="適当なテキスト">初期値。
+改行コードを含む。</textarea></td></tr>
+    </table>
+    <table><thead><caption>入力候補系</caption></thead>
+        <tr><th>select</th><td><select><option value="apple">林檎</option><option value="orange">蜜柑</option></select></td></tr>
+        <tr><th>datalist</th><td><input list="ui-element-names"></td></tr>
+    </table>
+    <table><thead><caption>アクセシビリティ系</caption></thead>
+        <tr><th>fieldset</th><td><fieldset><input type="checkbox"><input type="checkbox"></fieldset></td></tr>
+        <tr><th>legend</th><td><fieldset><legend>グループ名</legend><input type="checkbox"><input type="checkbox"></fieldset></td></tr>
+        <tr><th>label</th><td><label>名前<input placeholder="山田"></label></td></tr>
+        <tr><th>optgroup</th><td><select><optgroup label="野菜"><option value="potatoe">芋</option><option value="tomato">トマト</option></optgroup><optgroup label="果物"><option value="apple">林檎</option><option value="orange">蜜柑</option></optgroup></select></td></tr>
+    </table>
+    <table><thead><caption>HTTP通信系</caption></thead>
+        <tr><th>form</th><td><form><button>送信</button><input type="hidden"></form></td></tr>
+    </table>
+    <table><thead><caption>出力系</caption></thead>
+        <tr><th>プログレス</th><td><progress></td></tr>
+        <tr><th>メーター</th><td>
+            <meter value="50" max="100" low="20" high="80"></meter>
+            <meter value="10" max="100" low="20" high="80"></meter>
+            <meter value="90" max="100" low="20" high="80"></meter>
+            <meter value="10" max="100" low="20" high="80" optimum="81"></meter><!-- 赤になる条件：low,high範囲外かつoptimumと71以上の差があるとき -->
+            <meter value="20" max="100" low="20" high="80" optimum="90"></meter>
+            <meter value="80" max="100" low="20" high="80" optimum="10"></meter>
+            <meter value="90" max="100" low="20" high="80" optimum="10"></meter><!-- 赤になる条件：low,high範囲外かつoptimumと71以上の差があるとき -->
+            <meter value="80" max="100" low="20" high="80" optimum="80"></meter><!-- 緑になる条件：low,high範囲内かつoptimumと70以内の差であるとき -->
+        </td></tr>
+        <tr><th>アウトプット</th><td><output>出力値</output></td></tr>
+    </table>
+</div>
+<div id="input-table"></div>
+<datalist id="ui-element-names">
+<option value="button">
+<option value="datalist">
+<option value="fieldset">
+<option value="form">
+<option value="input">
+<option value="label">
+<option value="legend">
+<option value="meter">
+<option value="optgroup">
+<option value="option">
+<option value="output">
+<option value="progress">
+<option value="select">
+<option value="textarea">
+</datalist>
+
+
+<h1>情報源</h1>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element">HTML要素一覧</a>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element#%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0">入力要素一覧</a>
+</ul>
+
+<button>ボタン</button>
+<datalist id="ui-element-names">
+<option value="button">
+<option value="datalist">
+<option value="fieldset">
+<option value="form">
+<option value="input">
+<option value="label">
+<option value="legend">
+<option value="meter">
+<option value="optgroup">
+<option value="option">
+<option value="output">
+<option value="progress">
+<option value="select">
+<option value="textarea">
+</datalist>
+
+<label>UI要素名</label><input id="" name="" type="text" placeholder="button, input, select, ..." list="ui-element-names">
+
+button
+datalist
+fieldset
+form
+input
+label
+legend
+meter
+optgroup
+option
+output
+progress
+select
+textarea
+
+
+<br><span style="text-decoration:underline;">スペース の代わりにハイフン-とアンダーバー_を使って単語を区切る。</span><br>
+
+<p style="text-decoration:underline;">スペース<code> </code>の代わりにハイフン<code>-</code>とアンダーバー<code>_</code>を使って単語を区切る。</p>
+
+<table>
+<tr><th>button</th><td><input type="button"></td></tr>
+</table>
+
+
+
+<script>
+window.addEventListener('DOMContentLoaded', (event) => {
+    /*
+    const table = document.createElement('table')
+    const types = ['button', 'checkbox', 'color', 'date', 'datetime-local', 'email', 'file', 'hidden', 'image', 'month', 'number', 'password', 'radio', 'range', 'reset', 'search', 'submit', 'tel', 'text', 'time', 'url', 'week']
+    for (let type of types) {
+        const tr = document.createElement('tr')
+        const th = document.createElement('th')
+        const td = document.createElement('td')
+        const input = document.createElement('input')
+        input.type = type
+        th.append(type)
+        td.append(input)
+        tr.append(th, td)
+        table.append(tr)
+    }
+    const buttonTypes = ['button', 'image', 'reset', 'submit']
+    const textTypes = ['email', 'password', 'search', 'tel', 'text', 'url']
+    const dialogTypes = ['color', 'date', 'datetime-local', 'file', 'month', 'time', 'week']
+    const checkTypes = ['checkbox', 'radio']
+    const rangeTypes = ['number', 'range']
+    const hiddenTypes = ['hidden']
+    */
+
+
+    document.getElementById('input-table').innerHTML = '<h2>input系</h2>'
+    const types = new Map()
+    types.set('button',['button', 'image', 'reset', 'submit'] )
+    types.set('text', ['email', 'password', 'search', 'tel', 'text', 'url'])
+    types.set('dialog', ['color', 'date', 'datetime-local', 'file', 'month', 'time', 'week'])
+    types.set('check', ['checkbox', 'radio'])
+    types.set('range', ['number', 'range'])
+    types.set('hidden', ['hidden'])
+    for (let groupName of types.keys()) {
+        const table = document.createElement('table')
+        const caption = document.createElement('caption')
+        caption.textContent = groupName + '系'
+        table.append(caption)
+        for (let type of types.get(groupName)) {
+            const tr = document.createElement('tr')
+            const th = document.createElement('th')
+            const td = document.createElement('td')
+            const input = document.createElement('input')
+            input.type = type
+            th.append(type)
+            td.append(input)
+            tr.append(th, td)
+            table.append(tr)
+        }
+        document.getElementById('input-table').append(table)
+    }
+});
+</script>
+

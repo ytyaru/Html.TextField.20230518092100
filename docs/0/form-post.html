@@ -1,0 +1,62 @@
+<h1>情報源</h1>
+<ul>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element">HTML要素一覧</a>
+<li><a href="https://developer.mozilla.org/ja/docs/Web/HTML/Element#%E3%83%95%E3%82%A9%E3%83%BC%E3%83%A0">入力要素一覧</a>
+<li><a href="https://jsonplaceholder.typicode.com/">{JSON} Placeholder</a>
+</ul>
+
+<h1>リダイレクトされる</h1>
+<form id="form-0" method="POST" action="https://jsonplaceholder.typicode.com/posts/">
+<label for="user-id-0">user-id</label><input id="user-id-0" name="userId" type="number" min="1" max="10" value="1">
+<label for="title-0">title</label><input id="title-0" name="title" type="text" value="タイトル">
+<label for="body-0">body</label><textarea id="body-0" name="body">本文。</textarea>
+<button>POST</button>
+<output form="form-0" name="result" for="user-id-0 title-0 body-0"></output>
+</form>
+
+<h1>リダイレクトされない</h1>
+<form oninput="add.value = Number(one.value) + Number(two.value);">
+    <input type="number" name="one" value="0" size="10"> ＋
+    <input type="number" name="two" value="0" size="10"> ＝
+    <output name="add">0</output>
+</form>
+
+<h1>リダイレクトされない（JSでfetchする）</h1>
+<form id="form-1" method="POST" action="https://jsonplaceholder.typicode.com/posts/">
+<fieldset><legend>入力</legend>
+<label for="user-id">user-id</label><input id="user-id" name="userId" type="number" min="1" max="10" value="1">
+<label for="title">title</label><input id="title" name="title" type="text" value="タイトル">
+<label for="body">body</label><textarea id="body" name="body">本文。</textarea>
+</fieldset>
+<button>POST</button>
+<!--<output id="result" form="form-1" name="result" for="user-id title body"></output>-->
+</form>
+<textarea id="result" style="width:100%;"></textarea>
+
+<script>
+window.addEventListener('DOMContentLoaded', async(event) => {
+    const form1 = document.getElementById('form-1');
+    form1.addEventListener('submit', async(event)=>{
+        event.preventDefault();
+        let param = {
+            method: "POST",
+            body: JSON.stringify({
+                title: document.getElementById('title').value,
+                body: document.getElementById('body').value,
+                userId: document.getElementById('user-id').value
+            }),
+            headers: {
+                "Content-type": "application/json; charset=UTF-8"
+            }
+        }
+        console.log('post-data', param)
+        fetch("https://jsonplaceholder.typicode.com/posts/", param)
+            .then(res=>res.json())
+            .then(json=>{console.log("post-result", json);document.getElementById('result').value = JSON.stringify(json);})
+            .catch(e=>{console.error(e.message);document.getElementById('result').value = e.message});
+//            .then(json=>{console.log("post-result", json);document.getElementById('result').textContent = JSON.stringify(json);})
+//            .catch(e=>{console.error(e.message);document.getElementById('result').textContent = e.message});
+    })
+});
+</script>
+
